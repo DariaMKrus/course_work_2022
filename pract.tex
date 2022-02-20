@@ -1,0 +1,611 @@
+\documentclass[14pt, a4paper]{extarticle}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amssymb, amsfonts, amsmath, amsthm, microtype, pdfpages, indentfirst}
+
+\usepackage[style=gost-numeric, backend=biber]{biblatex}
+\addbibresource{diplom.bib}
+
+\usepackage[left=3cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+\newtheorem{definition}{Определение}[section]
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}{Лемма}[section]
+
+\usepackage[hang, flushmargin]{footmisc}
+\usepackage[unicode]{hyperref}
+\usepackage{footnotebackref}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+    % \tableofcontents
+    \section{Введение}
+
+    Движение несжимаемой нелинейно"=вязкой жидкости в ограниченной области $\Omega \subset R^n$,
+    $n = 2, 3$, на промежутке времени $[0, T]$ $(T < \infty)$ описывается следующей начально"=краевой задачей:
+
+    \begin{equation}\label{eq:1.1}
+        \begin{gathered}
+            \frac{\partial v}{\partial t} + \sum\limits_{i = 1}^n v_i \frac{\partial v}{\partial x_i} \textrm{Div} [2 \mu (L_2(v)) \varepsilon (v)] + \textrm{grad } p = f,
+        \end{gathered}
+    \end{equation}
+
+    \begin{equation}\label{eq:1.2}
+        \begin{gathered}
+            \textrm{div } v = 0, \ v|_{t=0} = v_0(x), \ v|_{\partial\Omega\times[0, T] = 0}.
+        \end{gathered}
+    \end{equation}
+
+    Здесь $v(x, t)$ --- вектор"=функция скорости частицы жидкости в точке $x \in \Omega$ в момент времени
+    $t \in [0, T];$ $p$ --- функция давления в жидкости; $f$ --- плотность внешних сил; $\varepsilon$ --- тензор
+    скоростей деформации $\varepsilon(v) = (\varepsilon_{ij}(v)), \ \varepsilon_{ij}(v) = \frac{1}{2} (\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i})$,
+    тензор $I_2(v)$ определяется равенством:
+    \begin{equation*}
+        \begin{gathered}
+            I_2^2(v) = \varepsilon(v)\, : \,\varepsilon(v) = \sum\limits_{i,j = 1}^n[\varepsilon_{ij}(v)]^2.
+        \end{gathered}
+    \end{equation*}
+
+    Здесь для произвольных квадратных матриц $A = (a_{ij})$ и $B = (b_{ij})$ используется символ
+    $A\, : \,B = \sum_{i,j = 1}^n a_{ij} b_{ij}$. Символ Div $M$ обозначающий дивергенцию тензора
+    $M = (m_{ij})$, т.е. вектор
+    \begin{equation*}
+        \begin{gathered}
+            \textrm{Div } M = (\sum\limits_{j = 1}^n \frac{\partial m_{1j}}{\partial x_j}, \ldots, \sum\limits_{j = 1}^n \frac{\partial m_{nj}}{\partial x_j}).
+        \end{gathered}
+    \end{equation*}
+
+    Данная математическая модель подробно исследовалась в работах профессора В.Г. Литвинова
+    (см. [1]), где приведены естественные ограничения на вязкость рассматриваемой среды через
+    свойства функции $\mu\, : \,\mathbb{R}_+ \rightarrow \mathbb{R}\, : \,\mu(s)$ должна быть определенная
+    при $s \geq 0$ непрерывно дифференцируемая скалярная функция, для которой выполнены неравенства
+    \begin{itemize}
+        \item [a)] $0 < c_1 \leq \mu(s) \leq C_2 < \infty$;
+        \item [b)] $-s\mu'(s) \leq \mu(s)$ при $\mu'(s) < 0$;
+        \item [c)] $|s\mu'(s)| \leq C_3 < \infty$.
+    \end{itemize}
+    Здесь и далее через $C_i$ обозначаются различные константы.
+
+
+    \section{Постановка задачи и основные результаты}
+
+    Сначала введем основные обозначения и вспомогательные утверждения.
+
+    Через $L_p(\Omega)$, $1 \leqslant p < \infty$, будем обозначать множество измеримых вектор"=функций 
+    $\mu\, : \,\Omega \rightarrow \mathbb{R}^n$, суммируемых с $p$-ой степенью. Через $W_p^m(\Omega)$, $m \geqslant 1$, $p \geqslant 1$,
+    будем обозначать пространства Соболева. Через $C_0^{\infty}(\Omega)^n$ обозначим пространство бесконечно"=дифференцируемых
+    вектор"=функций из $\Omega$ в $\mathbb{R}^n$ с компактным носителем в $\Omega$, Обозначим 
+    через $\mathcal{V}$ множество $\{v \in C_0^\infty(\Omega)^n, \ \textrm{div } v = 0\}$, Через $H$ мы обозначим замыкание $\mathcal{V}$ по норме 
+    $L_2(\Omega)$, через $V$ --- по норме $W_2^1(\Omega)$.
+
+    Введем основное пространство, в котором будут изучаться слабые решения изучаемой задачи:
+    \begin{equation*}
+        \begin{gathered}
+            W_1 = \{v\, : \,v \in L_2(0,T,V) \cap L_\infty(0,T,H), v' \in L_1(0,T,V^*)\}.
+        \end{gathered}
+    \end{equation*}
+    Пространство $W_1$ снабжено нормой $||v||_{W_1} = ||v||_{L_2(0,T,V)} + ||v||_{L_\infty(0,T,H)} + ||v'||_{L_1(0,T,V^*)}$.
+    \begin{definition}
+        Слабым решением задачи (\ref{eq:1.1})-(\ref{eq:1.2}) называется функция $v \in W_1$,
+        удовлетворяющая при всех $\varphi \in V$ и п.в. $t \in [0,T]$ равенству
+        \begin{equation}\label{eq:2.1}
+            \begin{gathered}
+                \langle v', \varphi \rangle - \int\limits_\Omega \sum\limits_{i,j=1}^n v_i v_j
+                \frac{\partial\varphi_j}{\partial x_i}dx + 2\int\limits_\Omega
+                \mu(I_2(v))\varepsilon(v)\, : \,\varepsilon(\varphi)dx = \langle f, \varphi \rangle,
+            \end{gathered}
+        \end{equation}
+        \noindent начальному условию $v(0) = v_0$.
+    \end{definition}
+
+    Здесь и далее $\langle v', \varphi \rangle = (\frac{\partial v}{\partial t} \varphi)$.
+
+    \begin{theorem}\label{th:2.1}
+        Пусть $f \in L_2(0,T;V*)$, $v_0 \in H$ и вязкость рассматриваемой среды 
+        $\mu$ удовлетворяет условиям а)---с). Тогда существует хотя бы одно решение
+        $v_* \in W_1$ начально"=краевой задачи (\ref{eq:1.1})-(\ref{eq:1.2}).
+    \end{theorem}
+
+
+    \section{Операторная трактовка}
+
+    Дадим операторную трактовку рассматриваемой задачи. Введем операторы при помощи следующих равенств:
+    \begin{equation*}
+        \begin{gathered}
+            K\, : \,V \rightarrow V^*, \ \langle K(v), \varphi \rangle =
+            \int\limits_\Omega \sum\limits_{i,j=1}^n v_i v_j \frac{\partial\varphi_j}{\partial x_i}dx, \
+            v \in V, \ \varphi \in V;
+        \end{gathered}
+    \end{equation*}
+    \begin{equation*}
+        \begin{gathered}
+            D\, : \,V \rightarrow V^*, \ \langle D(v), \varphi \rangle =
+            2\int\limits_\Omega \mu(I_2(v))\varepsilon(v)\, : \,\varepsilon(\varphi)dx, \
+            v \in V, \ \varphi \in V.
+        \end{gathered}
+    \end{equation*}
+    Тогда из (\ref{eq:2.1}) в силу произвольности функции $\varphi$ получаем следующее операторное уравнение:
+    \begin{equation}\label{eq:3.1}
+        \begin{gathered}
+            v'(t) + D(v) - K(v) = f.
+        \end{gathered}
+    \end{equation}
+    Таким образом, слабое решение начально"=краевой задачи (\ref{eq:1.1})-(\ref{eq:1.2}) --- это решение $v \in W_1$
+    операторного уравнения (\ref{eq:3.1}), удовлетворяющее начальному условию $v|_{t=0} = v_0$.
+
+    Отметим некоторые свойства введенных выше операторов.
+    \begin{lemma}
+        Отображение $D\, : \,L_2(0,T;V) \rightarrow L_2(0,T;V^*)$ непрерывно и монотонно.
+    \end{lemma}
+    \begin{proof}
+        Покажем непрерывность оператора $D$. Положив $z = v - u$ и используя теорему Лагранжа
+        на интервале $[0, 1]$ для функции
+        \begin{equation*}
+            \begin{gathered}
+                f(\delta) = \mu (I_2(u + \delta z)) \varepsilon(u + \delta z)\, : \,\varepsilon(w),
+            \end{gathered}
+        \end{equation*}
+        \begin{equation*}
+            \begin{gathered}
+                \langle D(v) - D(u), w \rangle = 2\int\limits_\Omega [\mu(I_2(v))\varepsilon(v) - \mu(I_2(u))\varepsilon(u)]\, : \,\varepsilon(w)dx =\\
+                = 2\int\limits_\Omega \frac{d}{d\delta} [\mu(I_2(u+\delta_0 z))\varepsilon(u+\delta_0 z)]\, : \,\varepsilon(w)dx =\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(u+\delta_0 z))\varepsilon(z) + \frac{d}{d\delta} \mu(I_2(u+\delta_0 z))\varepsilon(u+\delta_0 z) \bigg]\, : \,\varepsilon(w)dx =\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(u+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(w) + \\
+                + \frac{\varepsilon(u+\delta_0 z)\, : \,\varepsilon(z)}{(\varepsilon(u+\delta_0 z)\, : \,\varepsilon(u+\delta_0 z))^{\frac{1}{2}}}
+                \frac{d\mu(I_2(u+\delta_0 z))}{dI_2(u+\delta_0 z)} \varepsilon(u+\delta_0 z)\, : \,\varepsilon(w) \bigg] dx =\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(u+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(w) + \\
+                + \frac{1}{I_2(u+\delta_0 z)} \frac{d\mu(I_2(u+\delta_0 z))}{dI_2(u+\delta_0 z)} (\varepsilon(u+\delta_0 z)\, : \,\varepsilon(z))(\varepsilon(u+\delta_0 z)\, : \,\varepsilon(w)) \bigg] dx.
+            \end{gathered}
+        \end{equation*}
+        \noindent Следовательно
+        \begin{equation*}
+            \begin{gathered}
+                |\langle D(v) - D(u), w \rangle| \leq 2 \bigg| \int\limits_\Omega \mu(I_2(u+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(w) dx \bigg| +\\
+                + 2 \bigg| \int\limits_\Omega I_2(u+\delta_0 z) \frac{d\mu(I_2(u+\delta_0 z))}{dI_2(u+\delta_0 z)} I_2(z) I_2(w) dx \bigg| \leq\\
+                \leq 2C_5 \bigg( \int\limits_\Omega I^2_2(z)dx \bigg)^\frac{1}{2} \bigg( \int\limits_\Omega I^2_2(w)dx \bigg)^\frac{1}{2} +\\
+                + 2C_5 \bigg( \int\limits_\Omega I^2_2(z)dx \bigg)^\frac{1}{2} \bigg( \int\limits_\Omega I^2_2(w)dx \bigg)^\frac{1}{2} \leq\\
+                \leq C_6 ||z||_{L_2(\Omega)}||w||_{L_2(\Omega)} \leq C_7 ||z||_V ||w||_V.
+            \end{gathered}
+        \end{equation*}
+        Следовательно, $||D(v) - D(u)||_{V^*} \leq C_7 ||v-u||_V$. Таким образом, оператор $D\, : \,V \rightarrow V^*$ непрепывен.
+        Последнее неравенство выполнено почти для всех $t \in (0,T)$, возведем его в квадрат и проинтегрируем по $t$ от $0$ до $T$, получим
+        \begin{equation*}
+            \begin{gathered}
+                \int\limits_0^T||D(v) - D(u)||^2_{V^*}dx \leq C_7 \int\limits_0^T||v-u||^2_V dx.
+            \end{gathered}
+        \end{equation*}
+        Так как $||v - u||_V \in L_2(0,T)$, то $||D(v) - D(u)||_{V^*} \in L_2(0,T)$ и, следовательно, $D(v) - D(u) \in L_2(0,T;V^*)$.
+        Из последней оценки следует требуемое неравенство:
+        \begin{equation*}
+            \begin{gathered}
+                ||D(v) - D(u)||_{L_2(0,T;V*)} \leq C_7||v-u||_{L_2(0,T;V)}.
+            \end{gathered}
+        \end{equation*}
+        Теперь покажем монотонность оператора $D(v)$. Здесь также применим теорему Лагранжа к той же функции, что и выше.
+        \begin{equation*}
+            \begin{gathered}
+                \langle D(v) - D(u), v-u \rangle = 2\int\limits_\Omega [\mu(I_2(v))\varepsilon(v) - \mu(I_2(u))\varepsilon(u)]\, : \,\varepsilon(v-u)dx =\\
+                = 2\int\limits_\Omega \frac{d}{d\delta} [\mu(I_2(v+\delta_0 z))\varepsilon(v+\delta_0 z)]\, : \,\varepsilon(z)dx =\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z) + \frac{d}{d\delta} \mu(I_2(v+\delta_0 z))\varepsilon(v+\delta_0 z) \bigg]\, : \,\varepsilon(z)dx =\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(z) + \\
+                + \frac{d}{d\delta} \mu ((\varepsilon(v+\delta_0 z)\, : \,\varepsilon(v+\delta_0 z))^\frac{1}{2})\varepsilon(v+\delta_0 z) \, : \,\varepsilon(z) \bigg] dx=\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(z) + \\
+                + \frac{\varepsilon(v+\delta_0 z)\, : \,\varepsilon(z)}{(\varepsilon(v+\delta_0 z)\, : \,\varepsilon(v+\delta_0 z))^{\frac{1}{2}}}
+                \frac{d\mu(I_2(v+\delta_0 z))}{dI_2(v+\delta_0 z)} \varepsilon(v+\delta_0 z)\, : \,\varepsilon(z) \bigg] dx =\\
+                = 2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(z) + \\
+                + \frac{1}{I_2(v+\delta_0 z)} \frac{d\mu(I_2(v+\delta_0 z))}{dI_2(v+\delta_0 z)} (\varepsilon(v+\delta_0 z)\, : \,\varepsilon(z))^2 \bigg] dx.
+            \end{gathered}
+        \end{equation*}
+        Если $\frac{d\mu(s)}{ds} \geq 0$, тогда подынтегральная функция больше либо равна нулю. Следовательно
+        \begin{equation*}
+            \begin{gathered}
+                \langle D(u) - D(v), u-v \rangle \geq 0.
+            \end{gathered}
+        \end{equation*}
+        Если $\frac{d\mu(s)}{ds} \leq 0$, используя $s \frac{d\mu(s)}{ds} \geq -\mu(s)$, получим требуемое неравенство:
+        \begin{equation*}
+            \begin{gathered}
+                2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(z) + \\
+                + \frac{1}{I_2(v+\delta_0 z)} \frac{d\mu(I_2(v+\delta_0 z))}{dI_2(v+\delta_0 z)} (\varepsilon(v+\delta_0 z)\, : \,\varepsilon(z))^2 \bigg] dx \geq \\
+                \geq 2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(z) + \\
+                + \frac{I_2(v+\delta_0 z)}{I_2^2(v+\delta_0 z)} \frac{d\mu(I_2(v+\delta_0 z))}{dI_2(v+\delta_0 z)} I_2^2(v+\delta_0 z) I_2^2(z) \bigg] dx \geq \\
+                \geq 2\int\limits_\Omega \bigg[ \mu(I_2(v+\delta_0 z))\varepsilon(z)\, : \,\varepsilon(z)
+                + I_2(v+\delta_0 z) \frac{d\mu(I_2(v+\delta_0 z))}{dI_2(v+\delta_0 z)} I_2^2(z) \bigg] dx \geq \\
+                \geq 2\int\limits_\Omega [\mu(I_2(v+\delta_0 z)) I_2^2(z) + \mu(I_2(v+\delta_0 z)) I_2^2(z)] dx \geq 0,
+            \end{gathered}
+        \end{equation*}
+        \noindent что и завершает доказательство данной леммы.
+    \end{proof}
+
+
+    \section{Аппроксимационная задача}
+
+    Рассмотрим оператор $K_\delta(v)$, аппроксимирующий оператор $K(v)$:
+    \begin{equation*}
+        \begin{gathered}
+            K_\delta\, : \,V \rightarrow V^*, \ \langle K_\delta(v), \varphi \rangle =
+            \int\limits_\Omega\sum\limits_{i,j = 1}^n \frac{v_i v_j}{1+\delta|v|^2}\frac{\delta\varphi_j}{\delta x_i}dx, \
+            v \in V, \varphi \in V.
+        \end{gathered}
+    \end{equation*}
+    Здесь $|v|^2 = \sum^n_{i=1}v_i v_i$ и $\delta$ --- положительная константа.
+
+    Рассмотрим аппроксимационную задачу, заменяя в операторном уравнении (\ref{eq:3.1}) оператор
+    $K(v)$ на оператор $K_\delta(v)$. По аналогии определения слабого решения исходной задачи, дадим
+    определение слабого решения аппроксимационной задачи. Для этого введем пространство
+    \begin{equation*}
+        \begin{gathered}
+            W = \{ v\, : \,v \in L_2(0,T;V), \ v' \in L_2(0,T;V^*) \}
+        \end{gathered}
+    \end{equation*}
+    \noindent с нормой $||v||_W = ||v||_{L_2(0,T;V)} + ||v'||_{L_2(0,T;V^*)}$.
+
+    \begin{definition}
+        Пара функций $(v, f) \in W \times L_2(0,T;V^*)$ называется слабым решением
+        аппроксимационной задачи с обратной связью, если она удовлетворяет операторному равенству
+        \begin{equation}\label{eq:4.1}
+            \begin{gathered}
+                v'(t) + D(v) - K_\delta (v) = f,
+            \end{gathered}
+        \end{equation}
+        начальному условию $v(0) = v_0$ и условию обратной связи
+        \begin{equation}\label{eq:4.2}
+            \begin{gathered}
+                f \in \Psi(v).
+            \end{gathered}
+        \end{equation}
+    \end{definition}
+
+    Приведем свойства аппроксимационного оператора $K_\delta(v)$, доказанные в монографии [14]:
+    \begin{lemma}
+        \begin{enumerate} 
+            \item Для любого $\delta > 0$ отображение $K_\delta\, : \,L_2(0,T;V) \rightarrow L_2(0,T;V^*)$
+            корректно определена, непрерывно и справедлива оценка
+            \begin{equation}\label{eq:4.3}
+                \begin{gathered}
+                    ||K_\delta(v)||_{L_2(0,T;V^*)} \leq \frac{C_8}{\delta}.
+                \end{gathered}
+            \end{equation}
+            \noindent с некоторой константой $C_8$, не зависящей от $v$.
+            \item Для любого $\delta > 0$ отображение $K_\delta\, : \, W \rightarrow L_2(0,T;V^*)$ вполне непрерывно.
+            \item Для любого $\delta > 0$ справедлива оценка
+            \begin{equation*}
+                \begin{gathered}
+                    ||K_\delta(v)||_{L_1(0,T;V^*)} \leq С_9 |v||^2_{L_2(0,T;V)}
+                \end{gathered}
+            \end{equation*}
+        \end{enumerate}
+        с некоторой константой $C_9$, не зависящей от $v$ и $\delta$.
+    \end{lemma}
+
+    Для дальнейшего исследования введем новые операторы:
+    \begin{align*}
+        \boldsymbol{L}&\, : \,W \rightarrow L_2(0,T;V^*) \times H,&\boldsymbol{L}&(v) = (v' + D(v), v|_{t=0}); \\
+        \boldsymbol{K_\delta}&\, : \,W \subset L_2(0,T;V) \rightarrow L_2(0,T;V^*) \times H,&\boldsymbol{K_\delta}&(v) = (K_\delta(v), 0); \\
+        \boldsymbol{\Psi}&\, : \,W \rightarrow L_2(0,T;V^*) \times H,&\boldsymbol{\Psi}&(v) = (\Psi(v), v_0)
+    \end{align*}
+    \noindent и запишем аппроксимационную задачу в более компактном виде:
+    \begin{equation}\label{eq:4.4}
+        \begin{gathered}
+            \boldsymbol{L}(v) - \boldsymbol{K_\delta}(v) \in \boldsymbol{\Psi}(v).
+        \end{gathered}
+    \end{equation}
+
+    Исследуем свойства оператора $\boldsymbol{L}$.
+    \begin{lemma}
+        Нелинейное отображение $\boldsymbol{L}\, : \,W \rightarrow L_2(0,T;V^*) \times H$, корректно определено, обратимо и справедлива оценка
+        \begin{equation}\label{eq:4.5}
+            \begin{gathered}
+                ||v||_W \leq C_{10} ||\boldsymbol{L}(v)||_{L_2(0,T;V^*) \times H},
+            \end{gathered}
+        \end{equation}
+        \noindent для любых $v \in W$ и некоторой константы $C_{10}$.
+        Обратный оператор $\boldsymbol{L}^{-1}\, : \, L_2(0,T;V^*) \times H \rightarrow W$ непрерывен и
+        \begin{equation*}
+            \begin{gathered}
+                ||\boldsymbol{L}^{-1}(f, v_0)||_W \leq C_{11}(||v_0||_H + ||f||_{L_2(0,T;V^*)}).
+            \end{gathered}
+        \end{equation*}
+    \end{lemma}
+    \begin{proof}
+        Оператор взятия производной непрерывен, это следует из определения пространства $W$, оператор $D(v)$
+        непрерывен по доказанному выше. Так как вложение $W \subset C([0,T], H)$
+        непрерывно (см. [13]), то оператор взятия следа функции $v|_{t=0}$ корректно
+        определен и непрерывен, а следовательно, корректно определен и непрерывен оператор $\boldsymbol{L}$.
+
+        Докажем оценку (\ref{eq:4.5}). Для $v \in W$ обозначим $\boldsymbol{L}(v) = (\hat{f}, \hat{v}_0)$.
+        При каждом фиксированном $t \in [0, T]$ применим функционалы $v' + D(v) = \hat{f}$ к функции $v(t) \in V$
+        \begin{equation*}
+            \begin{gathered}
+                \langle v'(t), v(t) \rangle + \langle D(v), v(t) \rangle = \langle \hat{f}(t), v(t) \rangle.
+            \end{gathered}
+        \end{equation*}
+        Так как
+        \begin{equation*}
+            \begin{gathered}
+                \langle v'(t), v(t) \rangle = \frac{1}{2} \frac{d}{dt}||v(t)||^2_H;\\
+                \langle \hat{f}(t), v(t) \rangle_V \leq ||\hat{f}(t)||_{V^*}||v(t)||_V;\\
+                \langle D(v), v(t) \rangle = \\ = 2\int\limits_\Omega \mu(I_2(v))\varepsilon(v)\, : \,\varepsilon(v)dx
+                \geq 2C_{12} \int\limits_\Omega \varepsilon(v)\, : \,\varepsilon(v)dx \geq C_{12}||v||_V^2.
+            \end{gathered}
+        \end{equation*}
+
+        Последнее неравенство выполнено в силу первого неравенства Корна (см. [15], Часть 1, Пункт 12).
+
+        Проинтегрируем полученное неравенство по переменной t на отрезке $[0, t]$. Используя
+        начальное условие для функции $v(t)$ и неравенство Коши
+        $a \cdot b \leq \frac{\varepsilon}{2}a^2+\frac{1}{2\varepsilon}b^2 (\forall\varepsilon,a,b > 0)$,
+        приходим к оценке:
+        \begin{equation*}
+            \begin{gathered}
+                \frac{1}{2}||v(t)||^2_H - \frac{1}{2}||\hat{v}^0||^2_H + C_{12} \int\limits_0^t ||v(\tau)||^2_V d\tau \leq \\
+                \leq \frac{1}{2\varepsilon}\int\limits_0^t ||\hat{f}(t)||^2_{V^*} d\tau + \frac{\varepsilon}{2}\int\limits_0^t ||v(\tau)||^2_V d\tau
+            \end{gathered}
+        \end{equation*}
+        \noindent теперь выбирая $\varepsilon = C_{12}$, получаем
+        \begin{equation*}
+            \begin{gathered}
+                \frac{1}{2}||v(t)||^2_H + \frac{1}{2} C_{12} \int\limits_0^t ||v(\tau)||^2_V d\tau \leq
+                \frac{1}{2}||\hat{v}^0||^2_H + \frac{1}{2C_{12}}\int\limits_0^t ||\hat{f}(t)||^2_{V^*} d\tau,
+            \end{gathered}
+        \end{equation*}
+        \noindent умножим обе части неравенства на 2 и вычислим максимум по $t \in [0, T]$, получим
+        \begin{equation*}
+            \begin{gathered}
+                \max_{t \in [0,T]} ||v(t)||^2_H + C_{12} ||v||^2_{L_2(0,T;V)} \leq ||\hat{v}^0||^2_H
+                + \frac{1}{C_{12}} ||\hat{f}||^2_{L_2(0,T;V^*)}
+            \end{gathered}
+        \end{equation*}
+        Используя неравенсво $(a+b)^2 \leq 2(a^2+b^2), \ a,b > 0$, отсюда нетрудно получить итоговую оценку
+        \begin{equation*}
+            \begin{gathered}
+                \max_{t \in [0,T]} ||v(t)||_H + ||v||_{L_2(0,T;V)} \leq
+                C_{13} (||\hat{v}^0||_H + ||\hat{f}||_{L_2(0,T;V^*)})
+            \end{gathered}
+        \end{equation*}
+        с некоторой константой $C_{13}$.
+
+        Для того, чтобы оценить $||v'||_{L_2(0,T;V^*)}$, воспользуемся равенством $v' = -D(v) + \hat{f}$,
+        оценкой $||D(v)||_{L_2(0,T;V^*)} \leq C_{14} ||v||_{L_2(0,T;V)}$ и полученной выше оценкой
+        \begin{equation*}
+            \begin{gathered}
+                ||v'||_{L_2(0,T;V^*)} \leq ||\hat{f}||_{L_2(0,T;V^*)} + ||D(v)||_{L_2(0,T;V^*)} \leq\\
+                \leq ||\hat{f}||_{L_2(0,T;V^*)} + C_{14}||v||_{L_2(0,T;V)} \leq
+                C_{15}||\hat{v}^0||_H + ||\hat{f}||_{L_2(0,T;V^*)}).
+            \end{gathered}
+        \end{equation*}
+        Таким образом, мы получаем требуемую оценку
+        \begin{equation*}
+            \begin{gathered}
+                ||v||_W = ||v||_{L_2(0,T;V)} + ||v'||_{L_2(0,T;V^*)} \leq\\
+                \leq C_{15}\bigg(||\hat{v}_0||_H + ||\hat{f}||_{L_2(0,T;V^*)}\bigg) =
+                C_{15}||\boldsymbol{L}(v)||_{L_2(0,T;V^*) \times H}
+            \end{gathered}
+        \end{equation*}
+        \noindent с некоторой константой $C_{15}$.
+
+        Для доказательства обратимости отображения $\boldsymbol{L}$ достаточно применить теорему
+        (см [16], Глава 4, Теорема 1.1). Так как, оператор $D\, : \,V \rightarrow V^*$ непрерывен и монотонен,
+        то все условия теоремы выполнены. Применение теоремы показывает, что для каждого $(\hat{f}, \hat{v}_0)$
+        существует решение $v \in L_2(0,T;V)$, а следовательно, $v \in W$. Таким образом,
+        оператор $\boldsymbol{L}$ обратим. Переписывая оценку (\ref{eq:4.5}) в виде
+        \begin{equation*}
+            \begin{gathered}
+                ||\boldsymbol{L}^{-1}(\hat{f}, \hat{v}_0)||_W \leq C_{10}(||\hat{v}^0||_H + ||\hat{f}||_{L_2(0,T;V^*)})
+            \end{gathered}
+        \end{equation*}
+        \noindent получаем, что оператор $\boldsymbol{L}^{-1}$ непрерывен.
+    \end{proof}
+
+    Из последней леммы следует, что изучение операторного включения (\ref{eq:4.4}) эквивалентно 
+    исследованию задачи о неподвижной точке следующего включения:
+    \begin{equation}\label{eq:4.6}
+        \begin{gathered}
+            v \in F(v),
+        \end{gathered}
+    \end{equation}
+    \noindent где $F\, : \,W\rightarrow W$ и определен:
+    \begin{equation*}
+        \begin{gathered}
+            F(v) = \boldsymbol{L}^{-1} (\boldsymbol{K}_\delta(v) + \boldsymbol{\Psi}(v)).
+        \end{gathered}
+    \end{equation*}
+
+
+    \section{Разрешимость аппроксимационной задачи}
+
+    \begin{theorem}
+        Операторное включение (\ref{eq:4.6}) имеет хотя бы одно решение $v \in W$.
+    \end{theorem}
+    \begin{proof}
+        Для доказательства данной теоремы рассмотрим семейство аппроксимационных задач:
+        \begin{equation}\label{eq:5.1}
+            \begin{gathered}
+                v' + D(v) - \lambda K_\delta(v) \in \lambda\Psi(v), \ \lambda \in [0,1],
+            \end{gathered}
+        \end{equation}
+        \noindent или в компактной форме:
+        \begin{equation}\label{eq:5.2}
+            \begin{gathered}
+                v \in G(v),
+            \end{gathered}
+        \end{equation}
+        \noindent где $G(v) = \boldsymbol{L}^{-1} (\lambda\boldsymbol{K}_\delta(v) + \lambda\boldsymbol{\Psi}(v))$.
+        Заметим, что данное семейство совпадает с изучаемой задачей (\ref{eq:4.6}) при $\lambda = 1$.
+
+        Покажем, что определена топологическая степень deg $(G, \bar{B}_R, 0)$ (см. [17]) для многозначного
+        отображения $G$ на шаре $\bar{B}_R \subset W$ достаточно большого радиуса $R$ и отлична от нуля.
+
+        Если $v \in W$ --- решение одного из уравнений (\ref{eq:5.1}), то в силу оценок (\ref{eq:4.3}) и \ref{eq:4.5})
+        и условий $\boldsymbol{\Psi}1$ --- $\boldsymbol{\Psi}4$ имеем
+        \begin{equation*}
+            \begin{gathered}
+                ||v||_W \leq C_{11} ||(\boldsymbol{K}_\delta(v) + (f, v_0))||_{L_2(0,T;V^*) \times H} \leq\\
+                \leq C_{11} ||(\boldsymbol{K}_\delta(v)||_{L_2(0,T;V^*)} + ||f||_{L_2(0,T;V^*)} + ||v_0||_H \leq
+                C_{11} \bigg( \frac{C_8}{\delta} + C_{16} + ||v_0||_H \bigg).
+            \end{gathered}
+        \end{equation*}
+        Выберем $R >  C_{11} (\frac{C_8}{\delta} + C_{16} + ||v_0||_H)$,
+        тогда ни одно решение включения (\ref{eq:5.2}) не принадлежит границе шара $B_R \subset W$.
+        Поэтому отображение $G\, : \,W \times [0,1] \rightarrow W$ определяет гомотопию
+        многозначных отображений на $B_R$. Следовательно, топологическая степень $deg(G,\bar{B}_R,0)$
+        определена для каждого значения $\lambda \in [0,1]$ и в силу свойства
+        гомотопической инвариантности степени имеем
+        \begin{equation*}
+            \begin{gathered}
+                deg(G,\bar{B}_R,0) = deg(F,\bar{B}_R,0) = deg(I,\bar{B}_R,0) = 1.
+            \end{gathered}
+        \end{equation*}
+        так как $0 \in B_R$. Отличие от нуля степени отображения $F$ обеспечивает существование
+        решения операторного включения (\ref{eq:4.6}), а, следовательно, существование решения включения 
+        (\ref{eq:4.4}) и аппроксимационной задачи.
+    \end{proof}
+
+    \begin{theorem}
+        Для любого решения $v_\delta \in W, \ \delta > 0$, операторного включения (\ref{eq:4.6})
+        справедливы оценки
+        \begin{equation}\label{eq:5.3}
+            \begin{gathered}
+                \max_{t \in [0,T]} ||v_\delta(t)||_H + ||v_\delta||_{L_2(0,T;V)} \leq
+                C_{17} (||f||_{L_2(0,T;V^*)} + ||v_{\delta_0}||_H),
+            \end{gathered}
+        \end{equation}
+        \begin{equation}\label{eq:5.4}
+            \begin{gathered}
+                ||v_\delta'||_{L_1(0,T;V^*)} \leq C_{18} (1 + ||f||_{L_2(0,T;V^*)} + ||v_{\delta_0}||_H)^2,
+            \end{gathered}
+        \end{equation}
+        с константами $C_{17}$ и $C_{18}$, не зависящими от $\delta$. 
+    \end{theorem}
+    \begin{proof}
+        Пусть $v_\delta \in W$ решение операторного включения (\ref{eq:4.6}), существующего
+        по предыдущей теореме для некоторого $\delta > 0$. Повторяя рассуждения доказательства оценки
+        (\ref{eq:4.5}) и используя тот факт, что $ \langle K_\delta(v_\delta(t)), v_\delta(t) \rangle = 0$
+        для всех $t \in [0,T]$, отсюда нетрудно получить требуемую оценку:
+        \begin{equation*}
+            \begin{gathered}
+                \max_{t \in [0,T]} ||v_\delta(t)||_H + ||v_\delta||_{L_2(0,T;V)} \leq
+                C_{17} (||f||_{L_2(0,T;V^*)} + ||v_{\delta_0}||_H).
+            \end{gathered}
+        \end{equation*}
+
+        Для того, чтобы оценить $||v_\delta'||_{L_1(0,T;V^*)}$, воспользуемся равенством
+        $v_\delta' = -D(v_\delta) + K_\delta(v_\delta) + f$. Отсюда
+        \begin{equation}\label{eq:5.5}
+            \begin{gathered}
+                ||v_\delta'||_{L_1(0,T;V^*)} \leq ||D(v_\delta)||_{L_1(0,T;V^*)} +
+                ||K_\delta(v_\delta)||_{L_1(0,T;V^*)} + ||f||_{L_1(0,T;V^*)}.
+            \end{gathered}
+        \end{equation}
+
+        Используя непрерывность вложения $L_2(0,T;V^*) \subset L_1(0,T;V^*)$, с помощью неравенства Коши и оценки
+        $||D(v_\delta)||_{L_1(0,T;V^*)} \leq C_{14}||v_\delta||_{L_2(0,T;V)}$ получим
+        \begin{equation*}
+            \begin{gathered}
+                ||D(v_\delta)||_{L_1(0,T;V^*)} \leq C_{14}||D(v_\delta)||_{L_2(0,T;V^*)} \leq C_{19}||v_\delta||_{L_2(0,T;V)},\\
+                ||f||_{L_1(0,T;V^*)} \leq \sqrt{T}||f||_{L_2(0,T;V^*)}.
+            \end{gathered}
+        \end{equation*}
+        Кроме того, для $||K_\delta(v_\delta)||_{L_1(0,T;V^*)}$ имеет оценку:
+        \begin{equation*}
+            \begin{gathered}
+                ||K_\delta(v_\delta)||_{L_1(0,T;V^*)} \leq C_{20}||v_\delta||_{L_2(0,T;V)}^2.
+            \end{gathered}
+        \end{equation*}
+        Подставляя полученные оценки в неравенство (\ref{eq:5.5}) и используя оценку (\ref{eq:5.3}), получим:
+        \begin{equation*}
+            \begin{gathered}
+                ||v_\delta'||_{L_1(0,T;V^*)} \leq C_{19}||v_\delta||_{L_2(0,T;V)} + C_{20}||v_\delta||_{L_2(0,T;V)}^2
+                + \sqrt{T}||f||_{L_2(0,T;V^*)} \leq\\
+                \leq C_{21} (1 + ||f||_{L_2(0,T;V^*)} + ||v_{\delta_0}||_H)^2.
+            \end{gathered}
+        \end{equation*}
+    \end{proof}
+
+    \section{Доказательство теоремы \ref{th:2.1}}
+
+    Прежде чем переходить к доказательству теоремы \ref{th:2.1} о существовании слабых решений
+    исходной задачи, сформулируем утверждение о предельном переходе для оператора $K_\delta$.
+    \begin{lemma}\label{lm:6.1}
+        Если последовательность $\{ v_l \}_{l=1}^\infty$, $v_l \in L_2(0,T;V)$ удовлетворяет условиям:
+        \begin{equation*}
+            \begin{gathered}
+                v_l \rightharpoonup v_* \textrm{ слабо в } L_2(0,T;V),\\
+                v_l \rightarrow v_* \textrm{ почти всюду } Q_T,\\
+                v_l \rightarrow v_* \textrm{ сильно в } L_2(Q_T),
+            \end{gathered}
+        \end{equation*}
+        \noindent тогда
+        \begin{equation*}
+            \begin{gathered}
+                K_\delta(v_l) \rightarrow K(v_*) \textrm{ в смысле распределений при } l \rightarrow \infty, \ \delta \rightarrow 0.
+            \end{gathered}
+        \end{equation*}
+    \end{lemma}
+
+    Доказательство данной леммы можно найти в [14] (Глава 5, Лемма 5.3).
+
+    Итак, докажем теорему \ref{th:2.1} о существование решений задачи управления с обратной связью (\ref{eq:1.1}) --- (\ref{eq:1.2}), (??).
+
+    Возьмем произвольную последовательность положительных чисел\linebreak$\{ \delta_l \}_{l=1}^\infty$, $\delta_l \rightarrow 0$.
+    Для каждого $\delta_l$ известно, что соответствующая аппроксимационная задача (\ref{eq:4.6}) имеет,
+    по крайней мере, одно решение $v_l \in W$. 
+
+    Из оценки (\ref{eq:5.3}) следует, что $\{ v_l \}$ ограничена по норме $||\cdot||_{L_2(0,T;V)}$ и
+    $||\cdot||_{L_\infty(0,T;H)}$, а из  оценки (\ref{eq:5.4}) последовательность $\{ v_l' \}$
+    ограничена по норме пространства $L_1(0,T;V^*)$.
+    Тогда, не уменьшая общности рассуждений, будем полагать что:
+    \begin{equation*}
+        \begin{gathered}
+            v_l \rightharpoonup v_* \textrm{ слабо в } L_2(0,T;V),\\
+            v_l \rightharpoonup *_- \textrm{ слабо в } L_\infty(0,T;H),\\
+            v_l \rightarrow v_* \textrm{ сильно в } L_2(Q_T),\\
+            v_l \rightarrow v_* \textrm{ сильно в } Q_T,\\
+            v_l' \rightharpoonup v_*' \textrm{ в смысле распределений.}
+        \end{gathered}
+    \end{equation*}
+
+    Так как оператор $D$ слабо непрерывен, то будем полагать, что $D(v_i) \rightharpoonup D(v_*)$ слабо в
+    $L_2(0,T;V^*)$, а следовательно, в смысле распределений со значениями в $V^*$. 
+    В силу леммы \ref{lm:6.1} выполнена следующая сходимость:
+    \begin{equation*}
+        \begin{gathered}
+            K_{\delta_l}(v_l) \rightarrow K(v_*) \textrm{ в смысле распределений}.
+        \end{gathered}
+    \end{equation*}
+
+    Принимая во внимание оценки (\ref{eq:5.3}), (\ref{eq:5.4}) и условия $\boldsymbol{\Psi}1$ --- $\boldsymbol{\Psi}4$,
+    без ограничения общности можем предположить, что существует $f_* \in L_2(0,T;V^*)$ такое,
+    что $f_l \rightarrow f_* \in \boldsymbol{\Psi}(v_*)$ при $l \rightarrow \infty$.
+
+    Таким образом, переходя в каждом из членов равенства
+    \begin{equation*}
+        \begin{gathered}
+            v_l'+ D(v_l) - K_{\delta_l}(v_l) = f_l \in \Psi(v_l)
+        \end{gathered}
+    \end{equation*}
+    \noindent к пределу при $l \rightarrow \infty$, получим, что предельные функции $(v_*,f_*)$ удовлетворяют равенству
+    \begin{equation*}
+        \begin{gathered}
+            v_*'+ D(v_*) - K_{\delta_l}(v_*) = f_* \in \Psi(v_*)
+        \end{gathered}
+    \end{equation*}
+    \noindent а также переходя в начальном условии $v_l(0) = v_0$ к пределу при $l \rightarrow \infty$,
+    получим что $v_*$ удовлетворяет начальному условию $v_*(0) = v_0$.
+
+    Следовательно, $(v_*,f_*)$ --- слабое решение задачи управления с обратной связью
+    (\ref{eq:1.1}) --- (\ref{eq:1.2}), (??). Заметим, что так как $v_* \in L_2(0,T;V) \cap L_\infty(0,T;H)$,
+    то из равенства (\ref{eq:3.1}) следует, что $v_*' \in L_1(0,T;V^*)$.
+
+    % \clearpage
+    % \addcontentsline{toc}{section}{Список литературы}
+
+
+    % \nocite{*}
+    % \printbibliography{}
+
+\end{document}
