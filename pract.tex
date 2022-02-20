@@ -30,27 +30,21 @@
 
     \begin{equation}\label{eq:1.1}
         \begin{gathered}
-            \frac{\partial v}{\partial t} + \sum\limits_{i = 1}^n v_i \frac{\partial v}{\partial x_i} \textrm{Div} [2 \mu (L_2(v)) \varepsilon (v)] + \textrm{grad } p = f,
+            \sum\limits_{i = 1}^n v_i \frac{\partial v}{\partial x_i} - \nu \Delta v + \nabla p = f,
         \end{gathered}
     \end{equation}
 
     \begin{equation}\label{eq:1.2}
         \begin{gathered}
-            \textrm{div } v = 0, \ v|_{t=0} = v_0(x), \ v|_{\partial\Omega\times[0, T] = 0}.
+            \textrm{div } v = 0, \ x \in \Omega, \ v|_{t=0} = v_0, \ v|_{\partial\Omega = 0}.
         \end{gathered}
     \end{equation}
 
-    Здесь $v(x, t)$ --- вектор"=функция скорости частицы жидкости в точке $x \in \Omega$ в момент времени
-    $t \in [0, T];$ $p$ --- функция давления в жидкости; $f$ --- плотность внешних сил; $\varepsilon$ --- тензор
-    скоростей деформации $\varepsilon(v) = (\varepsilon_{ij}(v)), \ \varepsilon_{ij}(v) = \frac{1}{2} (\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i})$,
-    тензор $I_2(v)$ определяется равенством:
-    \begin{equation*}
-        \begin{gathered}
-            I_2^2(v) = \varepsilon(v)\, : \,\varepsilon(v) = \sum\limits_{i,j = 1}^n[\varepsilon_{ij}(v)]^2.
-        \end{gathered}
-    \end{equation*}
+    Здесь $v(x)$ --- вектор"=функция скорости частицы жидкости в точке $x \in \Omega$;
+    $p$ --- функция давления в жидкости; $\nu$ --- вязкость жидкости, $\nu > 0$;
+    $f$ --- плотность внешних сил, $f = f(x)$; 
 
-    Здесь для произвольных квадратных матриц $A = (a_{ij})$ и $B = (b_{ij})$ используется символ
+    Для произвольных квадратных матриц $A = (a_{ij})$ и $B = (b_{ij})$ используется символ
     $A\, : \,B = \sum_{i,j = 1}^n a_{ij} b_{ij}$. Символ Div $M$ обозначающий дивергенцию тензора
     $M = (m_{ij})$, т.е. вектор
     \begin{equation*}
@@ -90,24 +84,24 @@
     \end{equation*}
     Пространство $W_1$ снабжено нормой $||v||_{W_1} = ||v||_{L_2(0,T,V)} + ||v||_{L_\infty(0,T,H)} + ||v'||_{L_1(0,T,V^*)}$.
     \begin{definition}
-        Слабым решением задачи (\ref{eq:1.1})-(\ref{eq:1.2}) называется функция $v \in W_1$,
-        удовлетворяющая при всех $\varphi \in V$ и п.в. $t \in [0,T]$ равенству
+        Слабым решением задачи (\ref{eq:1.1})-(\ref{eq:1.2}) называется функция $v \in V^1$,
+        удовлетворяющая при всех $\varphi \in V^1$ равенству
         \begin{equation}\label{eq:2.1}
             \begin{gathered}
-                \langle v', \varphi \rangle - \int\limits_\Omega \sum\limits_{i,j=1}^n v_i v_j
-                \frac{\partial\varphi_j}{\partial x_i}dx + 2\int\limits_\Omega
-                \mu(I_2(v))\varepsilon(v)\, : \,\varepsilon(\varphi)dx = \langle f, \varphi \rangle,
+                - \sum\limits_{i,j=1}^n \int\limits_\Omega v_i v_j
+                \frac{\partial\varphi_j}{\partial x_i}dx + \nu\int\limits_\Omega
+                \nabla v\, : \, \nabla\varphi dx = \langle f, \varphi \rangle,
             \end{gathered}
         \end{equation}
         \noindent начальному условию $v(0) = v_0$.
     \end{definition}
 
-    Здесь и далее $\langle v', \varphi \rangle = (\frac{\partial v}{\partial t} \varphi)$.
+    Здесь и далее $\langle \varphi \rangle = (\frac{\partial v}{\partial t} \varphi)$.
 
     \begin{theorem}\label{th:2.1}
-        Пусть $f \in L_2(0,T;V*)$, $v_0 \in H$ и вязкость рассматриваемой среды 
+        Пусть $f \in V^{-1}$, $v_0 \in H$ и вязкость рассматриваемой среды 
         $\mu$ удовлетворяет условиям а)---с). Тогда существует хотя бы одно решение
-        $v_* \in W_1$ начально"=краевой задачи (\ref{eq:1.1})-(\ref{eq:1.2}).
+        $v_* \in V^1$ начально"=краевой задачи (\ref{eq:1.1})-(\ref{eq:1.2}).
     \end{theorem}
 
 
@@ -131,10 +125,10 @@
     Тогда из (\ref{eq:2.1}) в силу произвольности функции $\varphi$ получаем следующее операторное уравнение:
     \begin{equation}\label{eq:3.1}
         \begin{gathered}
-            v'(t) + D(v) - K(v) = f.
+            D(v) - K(v) = f.
         \end{gathered}
     \end{equation}
-    Таким образом, слабое решение начально"=краевой задачи (\ref{eq:1.1})-(\ref{eq:1.2}) --- это решение $v \in W_1$
+    Таким образом, слабое решение начально"=краевой задачи (\ref{eq:1.1})-(\ref{eq:1.2}) --- это решение $v \in V^1$
     операторного уравнения (\ref{eq:3.1}), удовлетворяющее начальному условию $v|_{t=0} = v_0$.
 
     Отметим некоторые свойства введенных выше операторов.
